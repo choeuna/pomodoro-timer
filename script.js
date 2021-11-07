@@ -42,9 +42,9 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionTime: 25,
-      breakTime: 5,
-      timeLeft: 25*60, // in seconds
+      sessionTime: 1,
+      breakTime: 2,
+      timeLeft: 1*60, // in seconds
       running: false,
       type: 'session',
       accInterval: ''
@@ -53,21 +53,27 @@ class Timer extends React.Component {
     this.handleStartStop = this.handleStartStop.bind(this);
     this.startCountdown = this.startCountdown.bind(this);
     this.decrementTimeLeft = this.decrementTimeLeft.bind(this);
-    this.resetTimes = this.resetTimes.bind(this);
+    this.reset = this.reset.bind(this);
+    this.playAudio = this.playAudio.bind(this);
+    this.stopAudio = this.stopAudio.bind(this);
   }
   
   handleTimeChange(event) {
     if (!this.state.running) {
       let e = event.target.id.split('-');
       let change = e[1] === 'increment' ? 1 : -1;
-      let remaining;
+      let remaining = 60;
       
       if (e[0] === 'session') {
-        remaining = (this.state.sessionTime + change) * 60;
-        this.setState({sessionTime: this.state.sessionTime + change});
+        if (this.state.sessionTime + change >= 1 && this.state.sessionTime + change <= 60){
+          remaining = (this.state.sessionTime + change) * 60;
+          this.setState({sessionTime: this.state.sessionTime + change});
+        } else { remaining *= this.state.sessionTime}
       } else {
-        remaining = (this.state.breakTime + change) * 60;
-        this.setState({breakTime: this.state.breakTime + change});
+        if (this.state.breakTime + change >= 1 && this.state.breakTime + change <= 60) {
+          remaining = (this.state.breakTime + change) * 60;
+          this.setState({breakTime: this.state.breakTime + change});
+        } else { remaining *= this.state.breakTime}
       }
       if (e[0] === this.state.type) {
         this.setState({timeLeft: remaining});
@@ -94,31 +100,51 @@ class Timer extends React.Component {
   decrementTimeLeft() {
     if (this.state.timeLeft === 0) {
       let newTime, newType;
-      if (this.state.type === 'work') {
+      if (this.state.type === 'session') {
         newTime = this.state.breakTime * 60;
-        newType = 'rest';
+        newType = 'break';
       } else {
         newTime = this.state.sessionTime * 60;
-        newType = 'work';
+        newType = 'session';
       }
       this.setState({
         timeLeft: newTime,
         type: newType
       })
+      this.playAudio('beep')
+    } else if (this.state.timeLeft === 10) {
+      this.playAudio('windDown')
     }
     this.setState({
       timeLeft: this.state.timeLeft - 1
     });
   }
   
-  resetTimes() {
+  reset() {
+    if (this.state.accInterval !== '') {
+      this.state.accInterval.cancel()
+      this.stopAudio('beep');
+      this.stopAudio('windDown');
+    };
     this.setState({
-      timeLeft: 25*60,
       sessionTime: 25,
       breakTime: 5,
+      timeLeft: 25*60, 
+      running: false,
       type: 'session',
       accInterval: ''
     })
+  }
+  
+  playAudio(id) {
+    let sound = document.getElementById(id);
+    sound.play()
+  }
+  
+  stopAudio(id) {
+    let sound = document.getElementById(id);
+    sound.pause();
+    sound.currentTime = 0;
   }
   
   render() {
@@ -145,10 +171,13 @@ class Timer extends React.Component {
             <p id='timer-label'>{timerLabel}</p>
             <div id='time-left'>{m}:{sStr}</div>
             <i class={timerIconClasses} id='start_stop' onClick={this.handleStartStop}></i>
-            <button onClick={this.resetTimes} id='reset'>reset</button>
+            <button onClick={this.reset} id='reset'>reset</button>
           </div>
           
           <TimeSetter timeName='break' label='rest' time={this.state.breakTime} onClick={this.handleTimeChange}/>
+          
+          <audio id='windDown' src='https://cdn.jsdelivr.net/gh/choeuna/pomodoro-timer@master/media/202163__luckylittleraven__gentleguitar.wav' type='audio/wav'></audio>
+          <audio id='beep' src='https://cdn.jsdelivr.net/gh/choeuna/pomodoro-timer@master/media/339343__newagesoup__soft-blip-e-major.wav'></audio>
         </div>
       </div>
     )
@@ -156,9 +185,3 @@ class Timer extends React.Component {
 }
 
 ReactDOM.render(<Timer />, document.getElementById('app'));
-
-// don't allow timers to go below 1 minute
-// don't allow times to go above 60 minutes
-// at 00:00, beep for at least 1 second
-// rewind beep with reset click
-// 
