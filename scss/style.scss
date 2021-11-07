@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Quicksand&family=Raleway:wght@200;400&display=swap');
+* {
+  // border: 1px dotted black;
+  margin: 0px;
+  padding: 0px;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+  font-size: 45px;
+  font-family: Raleway, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pomodoro-wrapper {
+  // border: 3px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 600px;
+  width: 100%;
+  min-height: 45vh;
+  justify-content: center;
+}
+
+#title-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: max(64px, 6vw);
+  margin-bottom: max(50px, 8vw);
+}
+
+#contents-wrapper {
+  // border: 3px solid green;
+  min-width: 600px;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#session-wrapper, #break-wrapper, #timer-wrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+}
+
+p {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+  }
