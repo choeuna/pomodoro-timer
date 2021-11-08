@@ -1,0 +1,21 @@
+{
+  "name": "pomodoro-timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choeuna/pomodoro-timer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/choeuna/pomodoro-timer/issues"
+  },
+  "homepage": "https://github.com/choeuna/pomodoro-timer#readme"
+}

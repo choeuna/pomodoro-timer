@@ -30,10 +30,10 @@ const TimeSetter = (props) => {
   
   return (
     <div id={wrapperId}>
-      <button onClick={onClick} id={increment}>+</button>
+      <button class='increment' onClick={onClick} id={increment}>+</button>
       <p id={labelId}>{props.label}</p>
       <p id={length}>{props.time}</p>
-      <button onClick={onClick} id={decrement}>-</button>
+      <button class='increment' onClick={onClick} id={decrement}>-</button>
     </div>
   )
 };
@@ -42,9 +42,9 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionTime: 1,
-      breakTime: 2,
-      timeLeft: 1*60, // in seconds
+      sessionTime: 25,
+      breakTime: 5,
+      timeLeft: 25*60, // in seconds
       running: false,
       type: 'session',
       accInterval: ''
@@ -112,7 +112,7 @@ class Timer extends React.Component {
         type: newType
       })
       this.playAudio('beep')
-    } else if (this.state.timeLeft === 10) {
+    } else if (this.state.timeLeft === 15) {
       this.playAudio('windDown')
     }
     this.setState({
@@ -170,11 +170,13 @@ class Timer extends React.Component {
           <div id='timer-wrapper'>
             <p id='timer-label'>{timerLabel}</p>
             <div id='time-left'>{m}:{sStr}</div>
-            <i class={timerIconClasses} id='start_stop' onClick={this.handleStartStop}></i>
-            <button onClick={this.reset} id='reset'>reset</button>
+            <button class={timerIconClasses} id='start_stop' onClick={this.handleStartStop}></button>
+            
           </div>
           
           <TimeSetter timeName='break' label='rest' time={this.state.breakTime} onClick={this.handleTimeChange}/>
+          
+          <button onClick={this.reset} id='reset'>reset</button>
           
           <audio id='windDown' src='https://cdn.jsdelivr.net/gh/choeuna/pomodoro-timer@master/media/202163__luckylittleraven__gentleguitar.wav' type='audio/wav'></audio>
           <audio id='beep' src='https://cdn.jsdelivr.net/gh/choeuna/pomodoro-timer@master/media/339343__newagesoup__soft-blip-e-major.wav'></audio>

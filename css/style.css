@@ -1,12 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Quicksand&family=Raleway:wght@200;400&display=swap');
-$gradient: linear-gradient(125deg, #D4C39B, #E8E5DA, #9EB7E5);
-$text-color: #2B3C64;
-
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Quicksand&family=Raleway:wght@200;400&display=swap");
 * {
   margin: 0px;
   padding: 0px;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 #app {
   height: 100vh;
@@ -17,20 +13,16 @@ $text-color: #2B3C64;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: $gradient;
+  background-image: linear-gradient(125deg, #D4C39B, #E8E5DA, #9EB7E5);
   background-size: 400%;
   background-position: left;
-  animation: bgPosition 60s infinite alternate;
-}
+  animation: bgPosition 60s infinite alternate; }
 
 @keyframes bgPosition {
   0% {
-    background-position: right;    
-  }
+    background-position: right; }
   100% {
-    background-position: left;    
-  }
-}
+    background-position: left; } }
 
 #pomodoro-wrapper {
   display: flex;
@@ -38,22 +30,16 @@ $text-color: #2B3C64;
   min-width: 600px;
   width: 100%;
   min-height: 45vh;
-  justify-content: center;
-}
+  justify-content: center; }
 
 #title-wrapper {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  //font-size: max(64px, 6vw); doesn't work on conversion
   font-size: 70px;
-  //margin-bottom: max(50px, 8vw); doesn't work on conversion
   margin-bottom: 50px;
-  color: $text-color;
-  mix-blend-mode: difference;
-
-}
-
+  color: #2B3C64;
+  mix-blend-mode: difference; }
 
 #contents-wrapper {
   min-width: 600px;
@@ -62,27 +48,23 @@ $text-color: #2B3C64;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  color: $text-color;
-  mix-blend-mode: difference;
-}
+  color: #2B3C64;
+  mix-blend-mode: difference; }
 
 #session-wrapper, #break-wrapper, #timer-wrapper {
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
-}
+  width: 30%; }
 
 #session-label, #break-label {
   font-size: 0.75em;
-  font-weight: 400;
-}
+  font-weight: 400; }
 
 #time-left {
   font-size: 2em;
-  margin-bottom: 20px;
-}
+  margin-bottom: 20px; }
 
 button {
   background: none;
@@ -91,41 +73,33 @@ button {
   padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
-}
+  outline: inherit; }
 
 #reset {
   font-weight: 400;
   font-size: 0.75em;
   width: 100%;
   display: flex;
-  justify-content: center;
-}
+  justify-content: center; }
 
 #start_stop {
-  font-size: .75em;
-}
+  font-size: .75em; }
 
 p {
-    margin: 0px;
-    display: flex;
-    justify-content: center;
-  }
+  margin: 0px;
+  display: flex;
+  justify-content: center; }
 
 #timer-label {
   display: flex;
-  align-items: center;
-}
+  align-items: center; }
 
 .increment {
-  font-size: 1.5em;
-}
+  font-size: 1.5em; }
 
 #reset {
   margin: 20px auto;
-  font-weight: 400;
-}
+  font-weight: 400; }
 
 audio {
-  transition: all 3s;
-}
+  transition: all 3s; }
